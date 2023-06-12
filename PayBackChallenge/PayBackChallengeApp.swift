@@ -11,7 +11,7 @@ import SwiftUI
 struct PayBackChallengeApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TransactionRow(transaction: transactionPreviewData.items[0])
         }
     }
 }

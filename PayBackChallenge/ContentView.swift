@@ -9,15 +9,39 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationView {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 24) {
+                    //MARK: Title
+                    Text("Overview")
+                        .font(.title2)
+                        .bold()
+                        .foregroundStyle(Color.white)
+                }
+                .padding()
+                .frame(maxWidth: .infinity)
+            }
+            .background(Color.background)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+               //MARK: SortingButton
+                ToolbarItem {
+                    Image(systemName: "line.3.horizontal.decrease.circle.fill")
+                        .symbolRenderingMode(.palette)
+                        .foregroundStyle(Color.icon, .primary)
+                        .foregroundStyle(Color.white, .secondary)
+                    
+                }
+            }
         }
-        .padding()
+        .navigationViewStyle(.stack)
     }
 }
+
+
+
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
