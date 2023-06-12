@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct PayBackChallengeApp: App {
+    @StateObject var transactionListVM = TansactionListViewModel()
+    
     var body: some Scene {
         WindowGroup {
             TransactionRow(transaction: transactionPreviewData.items[0])
+                .environmentObject(transactionListVM)
         }
     }
 }

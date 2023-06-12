@@ -27,7 +27,7 @@ struct TransactionRow: View {
                     .lineLimit(1)
                 
                 //MARK: Transaction Description
-                Text(transaction.transactionDetail.description)
+                Text(transaction.transactionDetail.description ?? "")
                     .font(.subheadline)
                     .lineLimit(0)
             }

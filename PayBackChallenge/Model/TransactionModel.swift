@@ -23,7 +23,7 @@ struct Alias: Codable {
 }
 
 struct TransactionDetail: Codable {
-    let description: String
+    let description: String?
     let bookingDate: String
     let value: Value
 }
