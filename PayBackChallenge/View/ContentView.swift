@@ -34,10 +34,7 @@ struct ContentView: View {
                 .toolbar {
                     //MARK: - SortingButton
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        Image(systemName: "line.3.horizontal.decrease.circle.fill")
-                            .symbolRenderingMode(.palette)
-                            .foregroundStyle(Color.icon, .primary)
-                            .foregroundStyle(Color.white, .secondary)
+                        FilterButton()
                     }
                     //MARK: - TotalAmount
                     ToolbarItem(placement: .navigationBarLeading ) {

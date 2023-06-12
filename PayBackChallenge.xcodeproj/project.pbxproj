@@ -20,6 +20,8 @@
 		E7F2F4832A373B0C00AB2F7B /* TansactionListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F2F4822A373B0C00AB2F7B /* TansactionListViewModel.swift */; };
 		E7F2F4852A37439200AB2F7B /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F2F4842A37439200AB2F7B /* MockData.swift */; };
 		E7F2F4882A37515300AB2F7B /* TransactionList .swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F2F4872A37515300AB2F7B /* TransactionList .swift */; };
+		E7F2F48A2A377C7000AB2F7B /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F2F4892A377C7000AB2F7B /* FilterButton.swift */; };
+		E7F2F48C2A37805900AB2F7B /* FilterButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F2F48B2A37805900AB2F7B /* FilterButtonViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,8 @@
 		E7F2F4822A373B0C00AB2F7B /* TansactionListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TansactionListViewModel.swift; sourceTree = "<group>"; };
 		E7F2F4842A37439200AB2F7B /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		E7F2F4872A37515300AB2F7B /* TransactionList .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionList .swift"; sourceTree = "<group>"; };
+		E7F2F4892A377C7000AB2F7B /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
+		E7F2F48B2A37805900AB2F7B /* FilterButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButtonViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,7 @@
 			children = (
 				E7F2F4822A373B0C00AB2F7B /* TansactionListViewModel.swift */,
 				E7F2F4802A3723EB00AB2F7B /* TransactionRowViewModel.swift */,
+				E7F2F48B2A37805900AB2F7B /* FilterButtonViewModel.swift */,
 			);
 			path = VievModel;
 			sourceTree = "<group>";
@@ -122,6 +127,7 @@
 				E7F2F4672A370F9F00AB2F7B /* ContentView.swift */,
 				E7F2F4872A37515300AB2F7B /* TransactionList .swift */,
 				E7F2F47D2A37205400AB2F7B /* TransactionRow.swift */,
+				E7F2F4892A377C7000AB2F7B /* FilterButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -205,6 +211,8 @@
 				E7F2F4852A37439200AB2F7B /* MockData.swift in Sources */,
 				E7F2F4832A373B0C00AB2F7B /* TansactionListViewModel.swift in Sources */,
 				E7F2F47E2A37205400AB2F7B /* TransactionRow.swift in Sources */,
+				E7F2F48C2A37805900AB2F7B /* FilterButtonViewModel.swift in Sources */,
+				E7F2F48A2A377C7000AB2F7B /* FilterButton.swift in Sources */,
 				E7F2F4682A370F9F00AB2F7B /* ContentView.swift in Sources */,
 				E7F2F4662A370F9F00AB2F7B /* PayBackChallengeApp.swift in Sources */,
 			);

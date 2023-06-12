@@ -52,17 +52,4 @@ enum Category {
             self = .error
         }
     }
-    
-    var description: String {
-        switch self {
-        case .income:
-            return "Income"
-        case .domesticTransfer:
-            return "Debit"
-        case .credit:
-            return "Credit"
-        case .error:
-            return "Please try again later"
-        }
-    }
 }
