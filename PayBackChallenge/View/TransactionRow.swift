@@ -14,28 +14,31 @@ struct TransactionRow: View {
     var body: some View {
         HStack() {
             VStack(alignment: .leading, spacing: 6) {
-                //MARK: Transaction date
+                //MARK: -Transaction date
                 Text(viewModel.formatDate(dateString: transaction.transactionDetail.bookingDate) ?? "")
                     .font(.system(size: 13))
-                    .lineLimit(1)
+                    .lineLimit(0)
                     .foregroundColor(.secondary)
                 
-                //MARK: Transaction title
+                //MARK: -Transaction title
                 Text(transaction.partnerDisplayName)
                     .font(.subheadline)
                     .bold()
                     .lineLimit(1)
                 
-                //MARK: Transaction Description
+                //MARK: -Transaction Description
                 Text(transaction.transactionDetail.description ?? "")
                     .font(.subheadline)
                     .lineLimit(0)
             }
             Spacer()
+            
+            //MARK: -Transaktion amount
             Text(viewModel.formatCurrency(amout: transaction.transactionDetail.value.amount,
                                           withCurrencyCode: transaction.transactionDetail.value.currency) ?? "")
             .bold()
             .foregroundColor(viewModel.amountColor(_transaction: transaction.category))
+            .font(.system(size: 14))
         }
         .padding([.top, .bottom], 8)
     }

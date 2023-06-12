@@ -13,7 +13,7 @@ struct PayBackChallengeApp: App {
     
     var body: some Scene {
         WindowGroup {
-            TransactionRow(transaction: transactionPreviewData.items[0])
+            ContentView()
                 .environmentObject(transactionListVM)
         }
     }

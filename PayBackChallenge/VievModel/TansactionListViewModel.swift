@@ -37,4 +37,12 @@ final class TansactionListViewModel: ObservableObject {
             }
             .store(in: &cancellables)
     }
+    
+    func getDate(from dateString: String) -> Date { //is used for sorting when representing a list 
+        let dateFormatter = ISO8601DateFormatter()
+        if let date = dateFormatter.date(from: dateString) {
+            return date
+        }
+        return Date()
+    }
 }
