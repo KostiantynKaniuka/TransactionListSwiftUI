@@ -31,6 +31,7 @@ struct TransactionList: View {
     var body: some View {
         NavigationView {
             VStack {
+                //MARK: - LIST
                 List {
                     ForEach(transactions.indices, id: \.self) { index in
                         NavigationLink {
