@@ -12,22 +12,18 @@ struct TransactionList: View {
     
     var body: some View {
         VStack {
-            if let transactions = transactionListVM.transactions?.items {
-                //MARK: -Sorting from newest to oldes
-                let sortedTransactions = transactions.sorted { (transaction1, transaction2) in
-                    let date1 = transactionListVM.getDate(from: transaction1.transactionDetail.bookingDate)
-                    let date2 = transactionListVM.getDate(from: transaction2.transactionDetail.bookingDate)
-                              return date1 > date2
-                          }
                 List {
-                    ForEach(sortedTransactions.indices, id: \.self) { index in
-                        TransactionRow(transaction: sortedTransactions[index])
+                    ForEach(transactionListVM.filterTransactions().indices, id: \.self) { index in
+                        NavigationLink {
+                            TransactionDetails(transaction: transactionListVM.filterTransactions()[index])
+                        } label: {
+                            TransactionRow(transaction: transactionListVM.filterTransactions()[index])
+                        }
                     }
                 }
             }
         }
     }
-}
 
 struct TransactionList__Previews: PreviewProvider {
     static let transactionListVM: TansactionListViewModel = {

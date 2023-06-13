@@ -44,7 +44,7 @@ struct TransactionRowViewModel {
             return .blue
         case .credit:
             return .red
-        case .error:
+        case .all:
             return .gray
         }
     }

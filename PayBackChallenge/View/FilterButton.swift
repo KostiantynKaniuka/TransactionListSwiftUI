@@ -17,6 +17,8 @@ struct FilterButton: View {
         }) {
             HStack {
                 Image(systemName: "line.3.horizontal.decrease.circle.fill")
+                    .resizable()
+                    .frame(width: 30, height: 30)
                     .font(.title)
                     .foregroundStyle(Color.icon, .primary)
                     .foregroundStyle(Color.white, .secondary)
@@ -25,7 +27,8 @@ struct FilterButton: View {
             .foregroundColor(.white)
             .background(Color.clear)
             .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-            .shadow(color: Color.icon, radius: 10, x: 0, y: 0)
+            .shadow(color: Color.icon, radius: 5, x: 0, y: 0)
+            
         }
         .alert("Show only", isPresented: $showingAlert) {
             Button("Income", role: .none) { }

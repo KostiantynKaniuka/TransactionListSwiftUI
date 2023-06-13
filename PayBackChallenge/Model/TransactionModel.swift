@@ -38,7 +38,7 @@ enum Category {
     case income
     case domesticTransfer
     case credit
-    case error
+    case all
     
     init(rawValue: Int) {
         switch rawValue {
@@ -49,7 +49,7 @@ enum Category {
         case 3:
             self = .credit
         default:
-            self = .error
+            self = .all
         }
     }
 }

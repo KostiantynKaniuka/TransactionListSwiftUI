@@ -18,7 +18,7 @@ struct ContentView: View {
                         .padding(.leading)
                         .font(.title2)
                         .bold()
-                        .foregroundStyle(Color.white)
+                        .foregroundStyle(Color.systemBackground)
                     //MARK: - Tramsaction list
                     TransactionList()
                         .background(Color.systemBackground)

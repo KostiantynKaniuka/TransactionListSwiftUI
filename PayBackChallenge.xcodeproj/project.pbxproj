@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E7495CCA2A386E4400BEAD7D /* TransactionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7495CC92A386E4400BEAD7D /* TransactionDetails.swift */; };
 		E7F2F4662A370F9F00AB2F7B /* PayBackChallengeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F2F4652A370F9F00AB2F7B /* PayBackChallengeApp.swift */; };
 		E7F2F4682A370F9F00AB2F7B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F2F4672A370F9F00AB2F7B /* ContentView.swift */; };
 		E7F2F46A2A370FA000AB2F7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7F2F4692A370FA000AB2F7B /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E7495CC92A386E4400BEAD7D /* TransactionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetails.swift; sourceTree = "<group>"; };
 		E7F2F4622A370F9E00AB2F7B /* PayBackChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PayBackChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7F2F4652A370F9F00AB2F7B /* PayBackChallengeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayBackChallengeApp.swift; sourceTree = "<group>"; };
 		E7F2F4672A370F9F00AB2F7B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				E7F2F4872A37515300AB2F7B /* TransactionList .swift */,
 				E7F2F47D2A37205400AB2F7B /* TransactionRow.swift */,
 				E7F2F4892A377C7000AB2F7B /* FilterButton.swift */,
+				E7495CC92A386E4400BEAD7D /* TransactionDetails.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 			files = (
 				E7F2F47C2A371EA100AB2F7B /* PreviewData.swift in Sources */,
 				E7F2F4882A37515300AB2F7B /* TransactionList .swift in Sources */,
+				E7495CCA2A386E4400BEAD7D /* TransactionDetails.swift in Sources */,
 				E7F2F4772A37162500AB2F7B /* TransactionModel.swift in Sources */,
 				E7F2F4742A3711AE00AB2F7B /* Extensions .swift in Sources */,
 				E7F2F4812A3723EB00AB2F7B /* TransactionRowViewModel.swift in Sources */,
