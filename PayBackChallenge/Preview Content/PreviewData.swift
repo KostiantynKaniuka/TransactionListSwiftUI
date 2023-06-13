@@ -7,7 +7,7 @@
 
 import Foundation
 
-var transactionPreviewData = Transactions(items: [
+var transactionPreviewData =  [
     Item(
         partnerDisplayName: "REWE Group",
         alias: Alias(reference: "795357452000810"),
@@ -58,4 +58,4 @@ var transactionPreviewData = Transactions(items: [
             value: Value(amount: 1240, currency: "PBP")
         )
     )
-])
+]

@@ -26,6 +26,6 @@ struct TransactionDetails: View {
 
 struct TransactionDetails_Previews: PreviewProvider {
     static var previews: some View {
-        TransactionDetails(transaction: transactionPreviewData.items[0])
+        TransactionDetails(transaction: transactionPreviewData[0])
     }
 }

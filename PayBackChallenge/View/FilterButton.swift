@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FilterButton: View {
-   
+    @Binding var filterSwitch: Category
     @State private var showingAlert = false
     var body: some View {
         Button(action: {
@@ -31,10 +31,19 @@ struct FilterButton: View {
             
         }
         .alert("Show only", isPresented: $showingAlert) {
-            Button("Income", role: .none) { }
-            Button("Debt", role: .none) { }
-            Button("Domestic transfer", role: .none) {}
-            Button("Cancel", role: .cancel){}
+                   Button("Income", role: .none) {
+                       filterSwitch = .income
+                   }
+                   Button("Debt", role: .none) {
+                       filterSwitch = .credit
+                   }
+                   Button("Domestic transfer", role: .none) {
+                       filterSwitch = .domesticTransfer
+                   }
+                   Button("All operations", role: .none) {
+                       filterSwitch = .all
+                   }
+                   Button("Cancel", role: .cancel) {}
                }
         }
     }
@@ -42,6 +51,6 @@ struct FilterButton: View {
 
 struct FilterButton_Previews: PreviewProvider {
     static var previews: some View {
-        FilterButton()
+        FilterButton(filterSwitch: .constant(.all))
     }
 }

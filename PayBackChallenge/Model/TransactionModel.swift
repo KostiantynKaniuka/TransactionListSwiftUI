@@ -12,10 +12,21 @@ struct Transactions: Codable {
 }
 
 struct Item: Codable {
+    
     let partnerDisplayName: String
     let alias: Alias
     let category: Int
     let transactionDetail: TransactionDetail
+//    var id: Int {
+//        return Int(alias.reference)!
+//    }
+    
+//    private enum CodingKeys: String, CodingKey {
+//        case alias
+//        case partnerDisplayName
+//        case category
+//        case transactionDetail
+//    }
 }
 
 struct Alias: Codable {

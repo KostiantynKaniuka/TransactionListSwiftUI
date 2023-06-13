@@ -8,9 +8,12 @@
 import Foundation
 import Combine
 
-final class TansactionListViewModel: ObservableObject {
-    @Published var transactions: Transactions?
-    var transactionCategory: Category = .all
+
+final class TransactionListViewModel: ObservableObject {
+    
+    @Published var transactionCategory: Category = .income
+    @Published var storedTransactions: [Item] = []
+    
     private var cancellables = Set<AnyCancellable>()
     
     init() {
@@ -34,13 +37,14 @@ final class TansactionListViewModel: ObservableObject {
                     print("✅ Error decoding mock data: \(error)")
                 }
             } receiveValue: { [weak self] result in
-                self?.transactions = result
+                self?.storedTransactions = result.items
+                self?.sortTransactions()
             }
             .store(in: &cancellables)
     }
 }
     
-    extension TansactionListViewModel {
+    extension TransactionListViewModel {
         
         private func getDate(from dateString: String) -> Date { //is used for sorting when representing a list
             let dateFormatter = ISO8601DateFormatter()
@@ -50,30 +54,15 @@ final class TansactionListViewModel: ObservableObject {
             return Date()
         }
         
-        private func sortTransactions() -> [Item] {
-            guard let transactions = transactions?.items else {
-                return []
-            }
+        func sortTransactions() {
+             let transactions = storedTransactions
+                
             let sortedTransactions = transactions.sorted { (transaction1, transaction2) in
                 let date1 = getDate(from: transaction1.transactionDetail.bookingDate)
                 let date2 = getDate(from: transaction2.transactionDetail.bookingDate)
                 return date1 > date2
             }
-            return sortedTransactions
+            storedTransactions = sortedTransactions
         }
-        
-        
-        func filterTransactions() -> [Item] {
-            let allTransactions = sortTransactions()
-            switch transactionCategory {
-            case .income:
-                return allTransactions.filter { $0.category == 1}
-            case .domesticTransfer:
-                return allTransactions.filter { $0.category == 2}
-            case .credit:
-                return allTransactions.filter { $0.category == 3}
-            case .all:
-                return allTransactions
-            }
-        }
+
     }

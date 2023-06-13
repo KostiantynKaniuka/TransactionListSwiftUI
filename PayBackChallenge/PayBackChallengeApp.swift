@@ -9,12 +9,13 @@ import SwiftUI
 
 @main
 struct PayBackChallengeApp: App {
-    @StateObject var transactionListVM = TansactionListViewModel()
+    @StateObject var transactionListVM = TransactionListViewModel()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(transactionListVM)
+                .preferredColorScheme(.light)
         }
     }
 }

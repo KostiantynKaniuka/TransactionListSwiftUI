@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var filterSwitch: Category = .all
     var body: some View {
         NavigationView {
                 VStack(alignment: .leading, spacing: 24) {
@@ -20,7 +21,7 @@ struct ContentView: View {
                         .bold()
                         .foregroundStyle(Color.systemBackground)
                     //MARK: - Tramsaction list
-                    TransactionList()
+                    TransactionList(category: $filterSwitch)
                         .background(Color.systemBackground)
                         .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
                         .shadow(color: Color.icon, radius: 10, x: 0, y: 0)
@@ -34,7 +35,7 @@ struct ContentView: View {
                 .toolbar {
                     //MARK: - SortingButton
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        FilterButton()
+                        FilterButton(filterSwitch: $filterSwitch)
                     }
                     //MARK: - TotalAmount
                     ToolbarItem(placement: .navigationBarLeading ) {
@@ -55,9 +56,9 @@ struct ContentView: View {
 
 
 struct ContentView_Previews: PreviewProvider {
-    static let transactionListVM: TansactionListViewModel = {
-        let transactionListVM = TansactionListViewModel()
-        transactionListVM.transactions = transactionPreviewData
+    static let transactionListVM: TransactionListViewModel = {
+        let transactionListVM = TransactionListViewModel()
+        transactionListVM.storedTransactions = transactionPreviewData
         return transactionListVM
     }()
     

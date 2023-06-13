@@ -8,31 +8,55 @@
 import SwiftUI
 
 struct TransactionList: View {
-    @EnvironmentObject var transactionListVM: TansactionListViewModel
+    @EnvironmentObject var transactionListVM: TransactionListViewModel
+    @Binding var category: Category
+    @State private var filteredTransaction: [Item] = []
+    private var transactions: [Item] {
+        filteredTransaction.isEmpty ? transactionListVM.storedTransactions: filteredTransaction
+    }
+    
+    private func performFiltering() {
+        switch category {
+        case .income:
+            filteredTransaction = transactionListVM.storedTransactions.filter{$0.category == 1}
+        case .domesticTransfer:
+            filteredTransaction = transactionListVM.storedTransactions.filter{$0.category == 2}
+        case .credit:
+            filteredTransaction = transactionListVM.storedTransactions.filter{$0.category == 3}
+        case .all:
+            filteredTransaction = transactionListVM.storedTransactions
+        }
+    }
     
     var body: some View {
-        VStack {
+        NavigationView {
+            VStack {
                 List {
-                    ForEach(transactionListVM.filterTransactions().indices, id: \.self) { index in
+                    ForEach(transactions.indices, id: \.self) { index in
                         NavigationLink {
-                            TransactionDetails(transaction: transactionListVM.filterTransactions()[index])
+                            TransactionDetails(transaction: transactions[index])
                         } label: {
-                            TransactionRow(transaction: transactionListVM.filterTransactions()[index])
+                            TransactionRow(transaction: transactions[index])
                         }
                     }
                 }
+                .onChange(of: category, perform: { newValue in
+                    performFiltering()
+                })
             }
         }
     }
+}
+
 
 struct TransactionList__Previews: PreviewProvider {
-    static let transactionListVM: TansactionListViewModel = {
-        let transactionListVM = TansactionListViewModel()
-        transactionListVM.transactions = transactionPreviewData
+    static let transactionListVM: TransactionListViewModel = {
+        let transactionListVM = TransactionListViewModel()
+    transactionListVM.storedTransactions = transactionPreviewData
         return transactionListVM
     }()
     static var previews: some View {
-        TransactionList()
+        TransactionList( category: .constant(.all))
             .environmentObject(transactionListVM)
     }
 }

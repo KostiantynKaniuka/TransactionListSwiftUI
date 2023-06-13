@@ -9,11 +9,8 @@ import Foundation
 
 
 final class FilterButtonViewModel {
-    var category: Category
-    
-    init(category: Category) {
-           self.category = category
-       }
+    var category: Category  = .all
+  
     
 
 }
