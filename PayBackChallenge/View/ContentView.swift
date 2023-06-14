@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var filterSwitch: Category = .all
+    
     var body: some View {
         NavigationView {
                 VStack(alignment: .leading, spacing: 24) {

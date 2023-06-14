@@ -11,40 +11,59 @@ struct TransactionList: View {
     @EnvironmentObject var transactionListVM: TransactionListViewModel
     @Binding var category: Category
     @State private var totalAmount: Decimal = 0
-
+    @State private var showAlert: Bool = false
+    
     private var transactions: [Item] {
         transactionListVM.filteredTransactions
+        
     }
- 
+    
     var body: some View {
         NavigationView {
             VStack {
                 //MARK: - TotalAmount
                 if totalAmount != 0 {
-                                    Text("Total Amount: \(String(describing: totalAmount))")
-                                        .font(.system(size: 16))
-                                        .bold()
-                                        .foregroundStyle(Color.black)
-                                        .padding()
-                                }
+                    Text("Total Amount: \(String(describing: totalAmount))")
+                        .font(.system(size: 16))
+                        .bold()
+                        .foregroundStyle(Color.black)
+                        .padding()
+                }
                 
                 //MARK: - LIST
-                List {
-                    ForEach(transactions.indices, id: \.self) { index in
-                        NavigationLink {
-                            TransactionDetails(transaction: transactions[index])
-                        } label: {
-                            TransactionRow(transaction: transactions[index])
+                if transactionListVM.isLoading { // Show progress view when loading
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle())
+                        .scaleEffect(1.5)
+                } else {
+                    List {
+                        ForEach(transactions.indices, id: \.self) { index in
+                            NavigationLink {
+                                TransactionDetails(transaction: transactions[index])
+                            } label: {
+                                TransactionRow(transaction: transactions[index])
+                            }
                         }
                     }
+                    .id(UUID())
+                    .onChange(of: category, perform: { newValue in
+                        transactionListVM.filterTransactions(for: category)
+                        totalAmount = transactionListVM.calculateTotalAmount(with: category)
+                    })
                 }
-                .id(UUID())
-                .onChange(of: category, perform: { newValue in
-                    transactionListVM.filterTransactions(for: category)
-                    totalAmount = transactionListVM.calculateTotalAmount(with: category)
-                })
             }
         }
+        //MARK: - Server Alert
+        .alert(isPresented: $transactionListVM.isError, content: {
+            Alert(
+                title: Text("Error"),
+                message: Text("Failed to fetch transaction data."),
+                primaryButton: .default(Text("Refresh"), action: {
+                    transactionListVM.getTransaction()
+                }),
+                secondaryButton: .cancel(Text("OK"))
+            )
+        })
     }
 }
 

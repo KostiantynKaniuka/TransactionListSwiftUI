@@ -6,44 +6,61 @@
 //
 
 import Foundation
-import Combine
-
 
 final class TransactionListViewModel: ObservableObject {
     @Published var transactionCategory: Category = .all
     @Published var storedTransactions: [Item] = []
     @Published var filteredTransactions: [Item] = []
-    
-    private var cancellables = Set<AnyCancellable>()
+    @Published var isLoading: Bool = true
+    @Published var isError: Bool = false
     
     init() {
         getTransaction()
     }
     
+    //MARK: - Fetch transactions
     func getTransaction() {
-        guard let data = mockData.data(using: .utf8) else {
-            print("❌ Failed to convert mock data to UTF-8 encoding.")
-            return
-        }
-        let decoder = JSONDecoder()
-        Just(data)
-            .decode(type: Transactions.self, decoder: decoder)
-            .receive(on: DispatchQueue.main)
-            .sink { completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure(let error):
-                    print("✅ Error decoding mock data: \(error)")
+        isLoading = true
+        DispatchQueue.global().asyncAfter(deadline: .now() + 3) { [weak self] in
+            guard let self = self else { return }
+            let shouldFailResponse = Int.random(in: 1...10) <= 5
+            if shouldFailResponse {
+                DispatchQueue.main.async {
+                    print("❌ Failed to fetch transaction data.")
+                    self.isLoading = false
+                    self.isError = true
                 }
-            } receiveValue: { [weak self] result in
-                self?.storedTransactions = result.items
-                self?.sortTransactions()
-                self?.filterTransactions(for: self?.transactionCategory ?? .income)
+            } else {
+                guard let data = mockData.data(using: .utf8) else {
+                    print("❌ Failed to convert mock data to UTF-8 encoding.")
+                    DispatchQueue.main.async {
+                        self.isLoading = false
+                    }
+                    return
+                }
+                let decoder = JSONDecoder()
+                do {
+                    let result = try decoder.decode(Transactions.self, from: data)
+                    
+                    DispatchQueue.main.async {
+                        self.storedTransactions = result.items
+                        self.sortTransactions()
+                        self.filterTransactions(for: self.transactionCategory)
+                        self.isLoading = false
+                        self.isError = false 
+                    }
+                } catch {
+                    print("✅ Error decoding mock data: \(error)")
+                    DispatchQueue.main.async {
+                        self.isError = true
+                        self.isLoading = false
+                    }
+                }
             }
-            .store(in: &cancellables)
+        }
     }
     
+    //MARK: - Filter transactions
     func filterTransactions(for category: Category) {
           switch category {
           case .income:
@@ -57,6 +74,7 @@ final class TransactionListViewModel: ObservableObject {
           }
       }
     
+     //MARK: - Total Amount
     func calculateTotalAmount(with categoty: Category) -> Decimal {
         switch categoty {
         case .income:
