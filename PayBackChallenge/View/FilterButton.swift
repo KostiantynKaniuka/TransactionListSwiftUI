@@ -14,7 +14,6 @@ struct FilterButton: View {
     var body: some View {
         Button(action: {
             showingAlert = true
-            print("Button tapped")
         }) {
             HStack {
                 Image(systemName: "line.3.horizontal.decrease.circle.fill")
@@ -48,7 +47,6 @@ struct FilterButton: View {
                }
         }
     }
-
 
 struct FilterButton_Previews: PreviewProvider {
     static var previews: some View {
