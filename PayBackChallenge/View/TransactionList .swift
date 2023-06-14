@@ -21,7 +21,6 @@ struct TransactionList: View {
     var body: some View {
         NavigationView {
             VStack {
-                
                 //MARK: - TotalAmount
                 if totalAmount != 0 {
                     Text("Total Amount: \(String(describing: totalAmount))")
@@ -30,7 +29,6 @@ struct TransactionList: View {
                         .foregroundStyle(Color.black)
                         .padding()
                 }
-                
                 //MARK: - LIST
                 if transactionListVM.isLoading { // Show progress view when loading
                     ProgressView()
@@ -54,7 +52,6 @@ struct TransactionList: View {
                 }
             }
         }
-        
         //MARK: - Server Alert
         .alert(isPresented: $transactionListVM.isError, content: {
             Alert(

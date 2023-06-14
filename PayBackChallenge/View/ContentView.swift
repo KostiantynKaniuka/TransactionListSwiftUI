@@ -16,14 +16,12 @@ struct ContentView: View {
         NavigationView {
                 VStack(alignment: .leading, spacing: 24) {
                     Spacer(minLength: 50)
-                    
                     //MARK: - Title
                     Text("Overview")
                         .padding(.leading)
                         .font(.title2)
                         .bold()
                         .foregroundStyle(Color.systemBackground)
-                    
                     //MARK: - Tramsaction list
                     TransactionList(category: $filterSwitch)
                         .background(Color.systemBackground)
@@ -36,7 +34,6 @@ struct ContentView: View {
                 .background(Color.background)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
-                    
                     //MARK: - SortingButton
                     ToolbarItem(placement: .navigationBarTrailing) {
                         FilterButton(filterSwitch: $filterSwitch)
@@ -54,7 +51,6 @@ struct ContentView: View {
                     ) {}
         }
         .navigationViewStyle(.stack)
-        
     }
 }
 
@@ -69,5 +65,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
             .environmentObject(transactionListVM)
     }
-        
 }

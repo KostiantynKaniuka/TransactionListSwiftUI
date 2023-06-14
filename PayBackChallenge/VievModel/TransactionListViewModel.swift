@@ -23,7 +23,7 @@ final class TransactionListViewModel: ObservableObject {
         isLoading = true
         DispatchQueue.global().asyncAfter(deadline: .now() + 3) { [weak self] in
             guard let self = self else { return }
-            let shouldFailResponse = Int.random(in: 1...10) <= 5
+            let shouldFailResponse = Int.random(in: 1...10) <= 5 // adjust failing 
             if shouldFailResponse {
                 DispatchQueue.main.async {
                     print("❌ Failed to fetch transaction data.")
