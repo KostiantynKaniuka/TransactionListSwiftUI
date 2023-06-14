@@ -10,9 +10,11 @@ import Combine
 
 
 final class TransactionListViewModel: ObservableObject {
+    private let rowViewModel = TransactionRowViewModel()
     
-    @Published var transactionCategory: Category = .income
+    @Published var transactionCategory: Category = .all
     @Published var storedTransactions: [Item] = []
+    @Published var filteredTransactions: [Item] = []
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -39,8 +41,35 @@ final class TransactionListViewModel: ObservableObject {
             } receiveValue: { [weak self] result in
                 self?.storedTransactions = result.items
                 self?.sortTransactions()
+                self?.filterTransactions(for: self?.transactionCategory ?? .income)
             }
             .store(in: &cancellables)
+    }
+    
+    func filterTransactions(for category: Category) {
+        switch category {
+        case .income:
+            filteredTransactions = storedTransactions.filter { $0.category == 1 }
+        case .domesticTransfer:
+            filteredTransactions = storedTransactions.filter { $0.category == 2 }
+        case .credit:
+            filteredTransactions = storedTransactions.filter { $0.category == 3 }
+        case .all:
+            filteredTransactions = storedTransactions
+        }
+    }
+    
+    func calculateTotalAmount(with categoty: Category) -> Decimal {
+        switch categoty {
+        case .income:
+            return filteredTransactions.reduce(Decimal(0)) { $0 + Decimal($1.transactionDetail.value.amount) }
+        case .domesticTransfer:
+            return filteredTransactions.reduce(Decimal(0)) { $0 + Decimal($1.transactionDetail.value.amount) }
+        case .credit:
+            return filteredTransactions.reduce(Decimal(0)) { $0 + Decimal($1.transactionDetail.value.amount) }
+        case .all:
+            return 0
+        }
     }
 }
     

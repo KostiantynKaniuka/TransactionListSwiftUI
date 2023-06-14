@@ -12,6 +12,7 @@ struct Transactions: Codable {
 }
 
 struct Item: Codable {
+   // var id = UUID()
     let partnerDisplayName: String
     let alias: Alias
     let category: Int
