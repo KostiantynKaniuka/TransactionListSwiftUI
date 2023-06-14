@@ -11,6 +11,11 @@ struct TransactionList: View {
     @EnvironmentObject var transactionListVM: TransactionListViewModel
     @Binding var category: Category
     @State private var filteredTransaction: [Item] = []
+    @State private var totalAmount: Double = 0
+    
+    
+    
+    
     private var transactions: [Item] {
         filteredTransaction.isEmpty ? transactionListVM.storedTransactions: filteredTransaction
     }
@@ -19,18 +24,31 @@ struct TransactionList: View {
         switch category {
         case .income:
             filteredTransaction = transactionListVM.storedTransactions.filter{$0.category == 1}
+            totalAmount = filteredTransaction.reduce(0.0) { $0 + $1.transactionDetail.value.amount }
         case .domesticTransfer:
             filteredTransaction = transactionListVM.storedTransactions.filter{$0.category == 2}
+            totalAmount = filteredTransaction.reduce(0.0) { $0 + $1.transactionDetail.value.amount }
         case .credit:
             filteredTransaction = transactionListVM.storedTransactions.filter{$0.category == 3}
+            totalAmount = filteredTransaction.reduce(0.0) { $0 + $1.transactionDetail.value.amount }
         case .all:
             filteredTransaction = transactionListVM.storedTransactions
+            totalAmount = 0
         }
     }
     
     var body: some View {
         NavigationView {
             VStack {
+                //MARK: - TotalAmount
+                if totalAmount != 0 {
+                                    Text("Total Amount: \(totalAmount)")
+                                        .font(.system(size: 16))
+                                        .bold()
+                                        .foregroundStyle(Color.black)
+                                        .padding()
+                                }
+                
                 //MARK: - LIST
                 List {
                     ForEach(transactions.indices, id: \.self) { index in

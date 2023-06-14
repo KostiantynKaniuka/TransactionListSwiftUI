@@ -37,13 +37,6 @@ struct ContentView: View {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         FilterButton(filterSwitch: $filterSwitch)
                     }
-                    //MARK: - TotalAmount
-                    ToolbarItem(placement: .navigationBarLeading ) {
-                        Text("Total Amount: 99999")
-                            .font(.system(size: 16))
-                            .bold()
-                            .foregroundStyle(Color.white)
-                    }
                 }
         }
         .navigationViewStyle(.stack)

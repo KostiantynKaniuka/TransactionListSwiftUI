@@ -33,7 +33,7 @@ struct TransactionRow: View {
             }
             Spacer()
             
-            //MARK: -Transaktion amount
+            //MARK: - Transaktion amount
             Text(viewModel.formatCurrency(amout: transaction.transactionDetail.value.amount,
                                           withCurrencyCode: transaction.transactionDetail.value.currency) ?? "")
             .bold()

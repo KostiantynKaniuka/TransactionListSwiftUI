@@ -12,7 +12,6 @@ struct Transactions: Codable {
 }
 
 struct Item: Codable {
-    
     let partnerDisplayName: String
     let alias: Alias
     let category: Int
