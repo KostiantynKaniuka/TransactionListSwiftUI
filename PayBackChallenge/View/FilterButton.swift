@@ -10,6 +10,7 @@ import SwiftUI
 struct FilterButton: View {
     @Binding var filterSwitch: Category
     @State private var showingAlert = false
+    
     var body: some View {
         Button(action: {
             showingAlert = true

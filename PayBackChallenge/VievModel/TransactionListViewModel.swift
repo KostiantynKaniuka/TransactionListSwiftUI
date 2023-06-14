@@ -10,8 +10,6 @@ import Combine
 
 
 final class TransactionListViewModel: ObservableObject {
-    private let rowViewModel = TransactionRowViewModel()
-    
     @Published var transactionCategory: Category = .all
     @Published var storedTransactions: [Item] = []
     @Published var filteredTransactions: [Item] = []
@@ -47,17 +45,17 @@ final class TransactionListViewModel: ObservableObject {
     }
     
     func filterTransactions(for category: Category) {
-        switch category {
-        case .income:
-            filteredTransactions = storedTransactions.filter { $0.category == 1 }
-        case .domesticTransfer:
-            filteredTransactions = storedTransactions.filter { $0.category == 2 }
-        case .credit:
-            filteredTransactions = storedTransactions.filter { $0.category == 3 }
-        case .all:
-            filteredTransactions = storedTransactions
-        }
-    }
+          switch category {
+          case .income:
+              filteredTransactions = storedTransactions.filter { $0.category == 1 }
+          case .domesticTransfer:
+              filteredTransactions = storedTransactions.filter { $0.category == 2 }
+          case .credit:
+              filteredTransactions = storedTransactions.filter { $0.category == 3 }
+          case .all:
+              filteredTransactions = storedTransactions
+          }
+      }
     
     func calculateTotalAmount(with categoty: Category) -> Decimal {
         switch categoty {
@@ -70,28 +68,27 @@ final class TransactionListViewModel: ObservableObject {
         case .all:
             return 0
         }
-    }
+       }
 }
     
-    extension TransactionListViewModel {
-        
-        private func getDate(from dateString: String) -> Date { //is used for sorting when representing a list
-            let dateFormatter = ISO8601DateFormatter()
-            if let date = dateFormatter.date(from: dateString) {
-                return date
-            }
-            return Date()
+extension TransactionListViewModel {
+    
+    private func getDate(from dateString: String) -> Date { //is used for converting date  when sorting a list
+        let dateFormatter = ISO8601DateFormatter()
+        if let date = dateFormatter.date(from: dateString) {
+            return date
         }
-        
-        func sortTransactions() {
-             let transactions = storedTransactions
-                
-            let sortedTransactions = transactions.sorted { (transaction1, transaction2) in
-                let date1 = getDate(from: transaction1.transactionDetail.bookingDate)
-                let date2 = getDate(from: transaction2.transactionDetail.bookingDate)
-                return date1 > date2
-            }
-            storedTransactions = sortedTransactions
-        }
-
+        return Date()
     }
+    
+    func sortTransactions() {
+        let transactions = storedTransactions
+        let sortedTransactions = transactions.sorted { (transaction1, transaction2) in
+            let date1 = getDate(from: transaction1.transactionDetail.bookingDate)
+            let date2 = getDate(from: transaction2.transactionDetail.bookingDate)
+            return date1 > date2
+        }
+        storedTransactions = sortedTransactions
+    }
+    
+}
