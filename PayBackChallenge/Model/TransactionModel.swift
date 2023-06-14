@@ -33,7 +33,6 @@ struct Value: Codable {
     let currency: String
 }
 
-
 enum Category {
     case income
     case domesticTransfer

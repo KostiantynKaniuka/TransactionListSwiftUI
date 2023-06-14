@@ -29,7 +29,6 @@ struct ContentView: View {
                         .background(Color.systemBackground)
                         .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
                         .shadow(color: Color.icon, radius: 10, x: 0, y: 0)
-                    
                 }
                 .padding(.top, 150)
                 .edgesIgnoringSafeArea(.bottom)
@@ -37,6 +36,7 @@ struct ContentView: View {
                 .background(Color.background)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
+                    
                     //MARK: - SortingButton
                     ToolbarItem(placement: .navigationBarTrailing) {
                         FilterButton(filterSwitch: $filterSwitch)

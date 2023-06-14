@@ -104,9 +104,9 @@
 		E7F2F4782A37166300AB2F7B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				E7F259D32A39E941002594D9 /* NetworkMonitor.swift */,
 				E7F2F4732A3711AE00AB2F7B /* Extensions .swift */,
 				E7F2F4842A37439200AB2F7B /* MockData.swift */,
-				E7F259D32A39E941002594D9 /* NetworkMonitor.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";

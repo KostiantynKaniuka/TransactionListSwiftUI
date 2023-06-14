@@ -11,6 +11,7 @@ import SwiftUI
 struct PayBackChallengeApp: App {
     @StateObject var transactionListVM = TransactionListViewModel()
     @StateObject var networkMonitor = NetworkMonitor()
+   
     
     var body: some Scene {
         WindowGroup {
