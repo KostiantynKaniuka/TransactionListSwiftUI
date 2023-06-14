@@ -25,19 +25,17 @@ struct TransactionRow: View {
                     .font(.subheadline)
                     .bold()
                     .lineLimit(1)
-                
                 //MARK: -Transaction Description
                 Text(transaction.transactionDetail.description ?? "")
                     .font(.subheadline)
                     .lineLimit(0)
             }
             Spacer()
-            
             //MARK: - Transaktion amount
             Text(viewModel.formatCurrency(amout: transaction.transactionDetail.value.amount,
                                           withCurrencyCode: transaction.transactionDetail.value.currency) ?? "")
             .bold()
-            .foregroundColor(viewModel.amountColor(_transaction: transaction.category))
+            .foregroundColor(viewModel.amountColor(transaction: transaction.category))
             .font(.system(size: 14))
         }
         .padding([.top, .bottom], 8)

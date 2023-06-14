@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var networkMonitor: NetworkMonitor
     @State var filterSwitch: Category = .all
+    @State private var showNetworkAlert = false
     
     var body: some View {
         NavigationView {
@@ -40,15 +42,21 @@ struct ContentView: View {
                         FilterButton(filterSwitch: $filterSwitch)
                     }
                 }
+                .onAppear {
+                                showNetworkAlert = !networkMonitor.isConnected
+                            }
+                .onChange(of: networkMonitor.isConnected) { connection in
+                        showNetworkAlert = connection == false
+                    }
+                    .alert(
+                        "Network connection seems to be offline.",
+                        isPresented: $showNetworkAlert
+                    ) {}
         }
         .navigationViewStyle(.stack)
+        
     }
 }
-
-
-
-
-
 
 struct ContentView_Previews: PreviewProvider {
     static let transactionListVM: TransactionListViewModel = {

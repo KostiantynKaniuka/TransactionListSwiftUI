@@ -29,7 +29,6 @@ struct TransactionList: View {
                         .foregroundStyle(Color.black)
                         .padding()
                 }
-                
                 //MARK: - LIST
                 if transactionListVM.isLoading { // Show progress view when loading
                     ProgressView()

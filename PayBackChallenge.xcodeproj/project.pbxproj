@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		E7495CCA2A386E4400BEAD7D /* TransactionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7495CC92A386E4400BEAD7D /* TransactionDetails.swift */; };
+		E7F259D42A39E941002594D9 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F259D32A39E941002594D9 /* NetworkMonitor.swift */; };
 		E7F2F4662A370F9F00AB2F7B /* PayBackChallengeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F2F4652A370F9F00AB2F7B /* PayBackChallengeApp.swift */; };
 		E7F2F4682A370F9F00AB2F7B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F2F4672A370F9F00AB2F7B /* ContentView.swift */; };
 		E7F2F46A2A370FA000AB2F7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7F2F4692A370FA000AB2F7B /* Assets.xcassets */; };
 		E7F2F46D2A370FA000AB2F7B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7F2F46C2A370FA000AB2F7B /* Preview Assets.xcassets */; };
 		E7F2F4742A3711AE00AB2F7B /* Extensions .swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F2F4732A3711AE00AB2F7B /* Extensions .swift */; };
 		E7F2F4772A37162500AB2F7B /* TransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F2F4762A37162500AB2F7B /* TransactionModel.swift */; };
-		E7F2F47A2A37167100AB2F7B /* PBTransactions.json in Resources */ = {isa = PBXBuildFile; fileRef = E7F2F4792A37167100AB2F7B /* PBTransactions.json */; };
 		E7F2F47C2A371EA100AB2F7B /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F2F47B2A371EA100AB2F7B /* PreviewData.swift */; };
 		E7F2F47E2A37205400AB2F7B /* TransactionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F2F47D2A37205400AB2F7B /* TransactionRow.swift */; };
 		E7F2F4812A3723EB00AB2F7B /* TransactionRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F2F4802A3723EB00AB2F7B /* TransactionRowViewModel.swift */; };
@@ -26,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		E7495CC92A386E4400BEAD7D /* TransactionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetails.swift; sourceTree = "<group>"; };
+		E7F259D32A39E941002594D9 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		E7F2F4622A370F9E00AB2F7B /* PayBackChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PayBackChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7F2F4652A370F9F00AB2F7B /* PayBackChallengeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayBackChallengeApp.swift; sourceTree = "<group>"; };
 		E7F2F4672A370F9F00AB2F7B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -33,7 +34,6 @@
 		E7F2F46C2A370FA000AB2F7B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E7F2F4732A3711AE00AB2F7B /* Extensions .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions .swift"; sourceTree = "<group>"; };
 		E7F2F4762A37162500AB2F7B /* TransactionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionModel.swift; sourceTree = "<group>"; };
-		E7F2F4792A37167100AB2F7B /* PBTransactions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PBTransactions.json; sourceTree = "<group>"; };
 		E7F2F47B2A371EA100AB2F7B /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
 		E7F2F47D2A37205400AB2F7B /* TransactionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRow.swift; sourceTree = "<group>"; };
 		E7F2F4802A3723EB00AB2F7B /* TransactionRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRowViewModel.swift; sourceTree = "<group>"; };
@@ -105,8 +105,8 @@
 			isa = PBXGroup;
 			children = (
 				E7F2F4732A3711AE00AB2F7B /* Extensions .swift */,
-				E7F2F4792A37167100AB2F7B /* PBTransactions.json */,
 				E7F2F4842A37439200AB2F7B /* MockData.swift */,
+				E7F259D32A39E941002594D9 /* NetworkMonitor.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -191,7 +191,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7F2F46D2A370FA000AB2F7B /* Preview Assets.xcassets in Resources */,
-				E7F2F47A2A37167100AB2F7B /* PBTransactions.json in Resources */,
 				E7F2F46A2A370FA000AB2F7B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -212,6 +211,7 @@
 				E7F2F4852A37439200AB2F7B /* MockData.swift in Sources */,
 				E7F2F4832A373B0C00AB2F7B /* TransactionListViewModel.swift in Sources */,
 				E7F2F47E2A37205400AB2F7B /* TransactionRow.swift in Sources */,
+				E7F259D42A39E941002594D9 /* NetworkMonitor.swift in Sources */,
 				E7F2F48A2A377C7000AB2F7B /* FilterButton.swift in Sources */,
 				E7F2F4682A370F9F00AB2F7B /* ContentView.swift in Sources */,
 				E7F2F4662A370F9F00AB2F7B /* PayBackChallengeApp.swift in Sources */,

@@ -13,6 +13,7 @@ final class TransactionListViewModel: ObservableObject {
     @Published var filteredTransactions: [Item] = []
     @Published var isLoading: Bool = true
     @Published var isError: Bool = false
+    private let networkMonitor: NetworkMonitor
     
     init() {
         getTransaction()
@@ -20,44 +21,44 @@ final class TransactionListViewModel: ObservableObject {
     
     //MARK: - Fetch transactions
     func getTransaction() {
-        isLoading = true
-        DispatchQueue.global().asyncAfter(deadline: .now() + 3) { [weak self] in
-            guard let self = self else { return }
-            let shouldFailResponse = Int.random(in: 1...10) <= 5
-            if shouldFailResponse {
-                DispatchQueue.main.async {
-                    print("❌ Failed to fetch transaction data.")
-                    self.isLoading = false
-                    self.isError = true
-                }
-            } else {
-                guard let data = mockData.data(using: .utf8) else {
-                    print("❌ Failed to convert mock data to UTF-8 encoding.")
+            isLoading = true
+            DispatchQueue.global().asyncAfter(deadline: .now() + 3) { [weak self] in
+                guard let self = self else { return }
+                let shouldFailResponse = Int.random(in: 1...10) <= 5
+                if shouldFailResponse {
                     DispatchQueue.main.async {
+                        print("❌ Failed to fetch transaction data.")
                         self.isLoading = false
-                    }
-                    return
-                }
-                let decoder = JSONDecoder()
-                do {
-                    let result = try decoder.decode(Transactions.self, from: data)
-                    
-                    DispatchQueue.main.async {
-                        self.storedTransactions = result.items
-                        self.sortTransactions()
-                        self.filterTransactions(for: self.transactionCategory)
-                        self.isLoading = false
-                        self.isError = false 
-                    }
-                } catch {
-                    print("✅ Error decoding mock data: \(error)")
-                    DispatchQueue.main.async {
                         self.isError = true
-                        self.isLoading = false
+                    }
+                } else {
+                    guard let data = mockData.data(using: .utf8) else {
+                        print("❌ Failed to convert mock data to UTF-8 encoding.")
+                        DispatchQueue.main.async {
+                            self.isLoading = false
+                        }
+                        return
+                    }
+                    let decoder = JSONDecoder()
+                    do {
+                        let result = try decoder.decode(Transactions.self, from: data)
+                        
+                        DispatchQueue.main.async {
+                            self.storedTransactions = result.items
+                            self.sortTransactions()
+                            self.filterTransactions(for: self.transactionCategory)
+                            self.isLoading = false
+                            self.isError = false
+                        }
+                    } catch {
+                        print("✅ Error decoding mock data: \(error)")
+                        DispatchQueue.main.async {
+                            self.isError = true
+                            self.isLoading = false
+                        }
                     }
                 }
             }
-        }
     }
     
     //MARK: - Filter transactions

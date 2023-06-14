@@ -35,7 +35,7 @@ struct TransactionRowViewModel {
         
     }
     
-    func amountColor(_transaction categoty: Int) -> Color {
+    func amountColor(transaction categoty: Int) -> Color {
         let colorSwitch: Category = .init(rawValue: categoty)
         switch colorSwitch {
         case .income:
