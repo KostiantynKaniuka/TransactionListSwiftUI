@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 final class TransactionListViewModel: ObservableObject {
     @Published var transactionCategory: Category = .all
@@ -13,51 +14,47 @@ final class TransactionListViewModel: ObservableObject {
     @Published var filteredTransactions: [Item] = []
     @Published var isLoading: Bool = true
     @Published var isError: Bool = false
+    private var cancellables = Set<AnyCancellable>()
     
     init() {
+        //getTransaction()
         getTransaction()
     }
     
     //MARK: - Fetch transactions
     func getTransaction() {
-        isLoading = true
-        DispatchQueue.global().asyncAfter(deadline: .now() + 3) { [weak self] in
-            guard let self = self else { return }
-            let shouldFailResponse = Int.random(in: 1...10) <= 5 // adjust failing 
-            if shouldFailResponse {
-                DispatchQueue.main.async {
-                    print("❌ Failed to fetch transaction data.")
+        guard let url = URL(string: "https://api.npoint.io/3a1948c60a6e75f8eee4") else {
+            print("❌ Invalid url")
+            return
+        }
+        URLSession.shared.dataTaskPublisher(for: url)
+            .tryMap { (data, responce) -> Data in
+                guard let httpResponce = responce as? HTTPURLResponse, httpResponce.statusCode == 200 else {
+                    throw URLError(.badServerResponse)
+                }
+                
+                return data
+            }
+            .decode(type: Transactions.self, decoder: JSONDecoder())
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .failure(let error):
+                    print("Error fetcheng transactions:", error)
                     self.isLoading = false
                     self.isError = true
+                case .finished:
+                    print("➡️ Finishing fetching transactions")
                 }
-            } else {
-                guard let data = mockData.data(using: .utf8) else {
-                    print("❌ Failed to convert mock data to UTF-8 encoding.")
-                    DispatchQueue.main.async {
-                        self.isLoading = false
-                    }
-                    return
-                }
-                let decoder = JSONDecoder()
-                do {
-                    let result = try decoder.decode(Transactions.self, from: data)
-                    
-                    DispatchQueue.main.async {
-                        self.storedTransactions = result.items
-                        self.sortTransactions()
-                        self.filterTransactions(for: self.transactionCategory)
-                        self.isLoading = false
-                        self.isError = false
-                    }
-                } catch {
-                    print("✅ Error decoding mock data: \(error)")
-                    DispatchQueue.main.async {
-                        self.isError = true
-                        self.isLoading = false
-                    }
-                }
+            } receiveValue: { [weak self] result in
+                self?.storedTransactions = result.items
+                self?.sortTransactions()
+                self?.filterTransactions(for: (self?.transactionCategory) ?? .all)
+                self?.isLoading = false
+                self?.isError = false
+                dump(self?.storedTransactions)
             }
-        }
+            .store(in: &cancellables)
     }
     
     //MARK: - Filter transactions
