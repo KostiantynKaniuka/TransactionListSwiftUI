@@ -15,7 +15,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
                 VStack(alignment: .leading, spacing: 24) {
-                    Spacer(minLength: 50)
+                    //Spacer(minLength: 50)
                     //MARK: - Title
                     Text("Overview")
                         .padding(.leading)
